@@ -1,0 +1,16 @@
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { quizReducer } from '../reducers/quizReducer';
+
+const rootReducer = combineReducers({
+  quiz: quizReducer,
+});
+
+const composeEnhancers =
+  (import.meta.env.MODE !== 'production' &&
+    typeof window !== 'undefined' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+
+export const store = createStore(rootReducer, applyMiddleware(thunk));
+// export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
